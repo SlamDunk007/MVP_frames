@@ -1,22 +1,24 @@
 package com.example.guannan.mvp_library.Proxy;
 
-import android.os.Bundle;
+import android.content.Intent;
 
 import com.example.guannan.mvp_library.Factory.MvpFactoryInterface;
-import com.example.guannan.mvp_library.Presenter.BasePresenter;
+import com.example.guannan.mvp_library.Presenter.ActivityPresenter;
+import com.example.guannan.mvp_library.Presenter.ActivityPresenterInterface;
 import com.example.guannan.mvp_library.View.BaseViewInterface;
 
 /**
  * @author guannan
  * @date 2017/12/21 17:05
+ * 将Presenter中的生命周期，Presenter和View的关系代理到这里进行处理
  */
 
-public class MvpProxy<V extends BaseViewInterface, P extends BasePresenter<V>> implements MvpProxyInterface{
+public class ActivityDelegate<V extends BaseViewInterface, P extends ActivityPresenter<V>> implements ActivityPresenterInterface<V>{
 
     private MvpFactoryInterface<V,P> mProxyFactory;
     private P mPresenter;
 
-    public MvpProxy(MvpFactoryInterface<V,P> mvpFactory){
+    public ActivityDelegate(MvpFactoryInterface<V,P> mvpFactory){
         this.mProxyFactory = mvpFactory;
     }
 
@@ -34,41 +36,40 @@ public class MvpProxy<V extends BaseViewInterface, P extends BasePresenter<V>> i
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        getPresenter(); //创建Presenter实例
+    public void onCreate() {
+        getPresenter(); //创建Presenter的对象
         if(mPresenter!=null){
-            mPresenter.onCreate(savedInstanceState);
+            mPresenter.onCreate();
         }
     }
 
     @Override
     public void onStart() {
-
         if(mPresenter!=null){
             mPresenter.onStart();
         }
     }
 
+    @Override
     public void onResume(V view) {
         if(mPresenter!=null){
-            mPresenter.onResume();
-            mPresenter.onAttachView(view);  //绑定presenter和View
+            mPresenter.onResume(view);
+            mPresenter.onAttachView(view);  //将View和Presenter进行绑定
         }
     }
 
-    @Override
-    public void onDetachView() {
-
-        if(mPresenter!=null){
-            mPresenter.onDetachView();
-        }
-    }
 
     @Override
     public void onPause() {
-
         if(mPresenter!=null){
             mPresenter.onPause();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        if(mPresenter!=null){
+            mPresenter.onStop();
         }
     }
 
@@ -76,6 +77,14 @@ public class MvpProxy<V extends BaseViewInterface, P extends BasePresenter<V>> i
     public void onDestroy() {
         if(mPresenter!=null){
             mPresenter.onDestroy();
+            mPresenter.onDetachView();
+        }
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        if(mPresenter!=null){
+            mPresenter.onNewIntent(intent);
         }
     }
 }

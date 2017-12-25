@@ -3,7 +3,7 @@ package com.example.guannan.mvp_frames.Presenter;
 import com.example.guannan.mvp_frames.Model.RequestManager;
 import com.example.guannan.mvp_frames.Model.TransiContent;
 import com.example.guannan.mvp_frames.View.RequestView;
-import com.example.guannan.mvp_library.Presenter.BasePresenter;
+import com.example.guannan.mvp_library.Presenter.ActivityPresenter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +14,7 @@ import retrofit2.Response;
  * @date 2017/12/22 11:42
  */
 
-public class RequestPresenter extends BasePresenter<RequestView> {
+public class RequestPresenter extends ActivityPresenter<RequestView> {
 
     public void getContent(){
 

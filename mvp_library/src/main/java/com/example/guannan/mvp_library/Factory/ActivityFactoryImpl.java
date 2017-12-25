@@ -1,16 +1,16 @@
 package com.example.guannan.mvp_library.Factory;
 
 import com.example.guannan.mvp_library.Inject.ViewConfig;
-import com.example.guannan.mvp_library.Presenter.BasePresenter;
+import com.example.guannan.mvp_library.Presenter.ActivityPresenter;
 import com.example.guannan.mvp_library.View.BaseViewInterface;
 
 /**
  * @author guannan
  * @date 2017/12/21 16:38
- * @des presenter工厂创建的具体实现
+ * @des activity的presenter工厂创建的具体实现
  */
 
-public class MvpFactoryImpl<V extends BaseViewInterface, P extends BasePresenter<V>> implements MvpFactoryInterface<V, P> {
+public class ActivityFactoryImpl<V extends BaseViewInterface, P extends ActivityPresenter<V>> implements MvpFactoryInterface<V, P> {
 
     private Class<?> mClass;
 
@@ -21,7 +21,7 @@ public class MvpFactoryImpl<V extends BaseViewInterface, P extends BasePresenter
      * @param <P>
      * @return
      */
-    public static <V extends BaseViewInterface, P extends BasePresenter<V>> MvpFactoryImpl<V, P> createFactory(Class<?> viewClass) {
+    public static <V extends BaseViewInterface, P extends ActivityPresenter<V>> ActivityFactoryImpl<V, P> createFactory(Class<?> viewClass) {
 
         if (viewClass != null) {
             ViewConfig viewConfig = viewClass.getAnnotation(ViewConfig.class);
@@ -29,12 +29,12 @@ public class MvpFactoryImpl<V extends BaseViewInterface, P extends BasePresenter
             if (viewConfig.value() != null) {
                 aClass = (Class<P>) viewConfig.value();
             }
-            return aClass == null ? null : new MvpFactoryImpl<V, P>(aClass);
+            return aClass == null ? null : new ActivityFactoryImpl<V, P>(aClass);
         }
         return null;
     }
 
-    public MvpFactoryImpl(Class<?> aClass) {
+    public ActivityFactoryImpl(Class<?> aClass) {
         this.mClass = aClass;
     }
 

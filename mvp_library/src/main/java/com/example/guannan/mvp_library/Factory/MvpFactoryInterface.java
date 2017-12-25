@@ -1,6 +1,6 @@
 package com.example.guannan.mvp_library.Factory;
 
-import com.example.guannan.mvp_library.Presenter.BasePresenter;
+import com.example.guannan.mvp_library.Presenter.PresenterInterface;
 import com.example.guannan.mvp_library.View.BaseViewInterface;
 
 /**
@@ -9,7 +9,7 @@ import com.example.guannan.mvp_library.View.BaseViewInterface;
  * @des 定义创建presenter的工厂的接口
  */
 
-public interface MvpFactoryInterface<V extends BaseViewInterface, P extends BasePresenter<V>> {
+public interface MvpFactoryInterface<V extends BaseViewInterface, P extends PresenterInterface<V>> {
 
     P createPresenter();
 }
