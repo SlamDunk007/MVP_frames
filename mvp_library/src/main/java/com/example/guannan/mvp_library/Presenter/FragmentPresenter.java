@@ -28,6 +28,13 @@ public class FragmentPresenter<V extends BaseViewInterface> implements FragmentP
         this.mView = null;
     }
 
+    public V getView(){
+        if(mView!=null){
+            return mView;
+        }
+        return null;
+    }
+
     @Override
     public void onCreate() {
 

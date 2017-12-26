@@ -31,8 +31,9 @@ public class ActivityDelegate<V extends BaseViewInterface, P extends ActivityPre
             if(mPresenter==null){
                 mPresenter = mProxyFactory.createPresenter();
             }
+            return mPresenter;
         }
-        return mPresenter;
+        return null;
     }
 
     @Override

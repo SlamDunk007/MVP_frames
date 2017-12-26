@@ -101,4 +101,15 @@ public class BaseFragment<V extends BaseViewInterface, P extends FragmentPresent
             mFragmentDelegate.onDestroy();
         }
     }
+
+    /**
+     * 获取Presenter
+     * @return
+     */
+    public P getPresenter(){
+        if(mFragmentDelegate!=null){
+            return mFragmentDelegate.getPresenter();
+        }
+        return null;
+    }
 }

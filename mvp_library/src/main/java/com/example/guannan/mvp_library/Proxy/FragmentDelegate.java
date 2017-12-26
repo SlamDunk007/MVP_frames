@@ -38,7 +38,7 @@ public class FragmentDelegate<V extends BaseViewInterface, P extends FragmentPre
     public void onCreate() {
         getPresenter(); //创建Presenter
         if (mPresenter != null) {
-            mPresenter.onCreateView();
+            mPresenter.onCreate();
         }
     }
 

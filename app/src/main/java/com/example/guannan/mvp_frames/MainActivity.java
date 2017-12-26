@@ -1,5 +1,6 @@
 package com.example.guannan.mvp_frames;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -28,10 +29,19 @@ public class MainActivity extends BaseActivity<RequestView,RequestPresenter> imp
 
         mBtnRequest = (Button) findViewById(R.id.btn_reqeust_data);
         mTvContent = (TextView) findViewById(R.id.tv_show_content);
+        Button btnJump = (Button) findViewById(R.id.btn_jump);
         mBtnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getPresenter().getContent();
+            }
+        });
+        btnJump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.add(R.id.fl_container,RequestFragment.getFragment(),"RequestFragment");
+                transaction.commit();
             }
         });
     }

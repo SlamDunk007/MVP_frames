@@ -32,6 +32,14 @@ public class FragmentFactoryImpl<V extends BaseViewInterface,P extends FragmentP
 
     @Override
     public P createPresenter() {
+        try {
+            if(mClass!=null){
+                P instance = mClass.newInstance();
+                return instance;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
